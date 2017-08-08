@@ -5,41 +5,55 @@
 using namespace std;
 class Rule
 {
-  protected:
-    string m_nRegex;
+protected:
+  string m_nName;
+  string m_nRegex;
 
-  public:
-    virtual bool m_fTest() = 0;
+public:
+  Rule(){};
+  string getName() { return m_nName; }
+  string getRegex() { return m_nRegex; }
+  virtual bool Test() = 0;
+  virtual ~Rule(){};
 };
 
 class Iden : public Rule
 {
-  private:
-  public:
-    Iden()
-    {
-        m_nRegex = "";
-    }
+private:
+public:
+  Iden()
+  {
+    m_nName = "identifier";
+    m_nRegex = "";
+  }
+  bool Test();
+  ~Iden(){};
 };
 
 class String : public Rule
 {
-  private:
-  public:
-    String()
-    {
-        m_nRegex = "";
-    }
+private:
+public:
+  String()
+  {
+    m_nName = "string";
+    m_nRegex = "";
+  }
+  bool Test();
+  ~String();
 };
 
 class Num : public Rule
 {
-  private:
-  public:
-    Num()
-    {
-        m_nRegex = "";
-    }
+private:
+public:
+  Num()
+  {
+    m_nName = "number";
+    m_nRegex = "";
+  }
+  bool Test();
+  ~Num();
 };
 
 #endif

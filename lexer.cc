@@ -1,20 +1,31 @@
 #include "lexer.h"
-#include "reader.h"
+#include "rule.h"
 #include <memory>
+#include <algorithm>
+
+class Reader;
 using namespace std;
-Lexer::Lexer() : m_nRules()
+Lexer::Lexer(shared_ptr<Reader> read)
+    : m_nReader(read),
+      m_nRules(),
+      m_nResult()
 {
-    m_nReader = shared_ptr<Reader>(new Reader());
 }
 
 void Lexer::m_fRemoveComment()
 {
 }
 
-void Lexer::AddRule(Rule &rule)
+void Lexer::AddRule(shared_ptr<Rule> rule)
 {
+    m_nRules[rule->getName()] = rule.get();
 }
 
-void Lexer::RemoveRule(Rule &rule)
+void Lexer::RemoveRule(shared_ptr<Rule> rule)
 {
+    auto p = find(m_nRules.begin(), m_nRules.end(), rule.get());
+    if (p != m_nRules.end())
+    {
+        m_nRules.erase(p);
+    }
 }
