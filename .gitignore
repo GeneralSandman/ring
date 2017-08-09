@@ -33,6 +33,5 @@
 
 
 .vscode
-data_structure/tree/test
-leetcode/template.cc
 .idea/*
+./java/code/*
