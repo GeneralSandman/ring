@@ -20,6 +20,8 @@ public:
   virtual int getNumber(void) { return INT_MIN; }
   virtual std::string getIdName(void){return "";}
   virtual std::string getStrText(void) { return ""; }
+
+  void printType(void);
 };
 
 static Token *Eof=new Token(-1);
@@ -51,8 +53,7 @@ public:
         Token(line) {}
 
   bool isIdentifier(void) { return true; }
-  std::string getStrText(void) { return m_nIdName; }
-  // std::string getIdName(void){return m_nIdName;}
+  std::string getIdName(void){return m_nIdName;}
 };
 
 class StrToken : public Token

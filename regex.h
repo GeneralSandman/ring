@@ -1,27 +1,27 @@
 #ifndef REGEX_H
 #define REGEX_H
 #include <iostream>
+#include <queue>
+#include <boost/regex.hpp>
 
+class Token;
 class Regex
 {
-  private:
-    std::string m_nPattern;
+private:
+  std::string m_nPattern;
+  boost::regex m_nRegex;
+  int m_nLine;
 
-  public:
-    Regex(const std::string &pattern)
-        : m_nPattern(pattern) {}
+  void setLineNu(int );
+  bool m_fLookAt(const std::string &sou, int &begin, boost::regex reg, boost::cmatch &mat);
+  void m_fFillQueue(boost::cmatch &, std::queue<Token *> &);
 
-    void regex_match(const std::string &);
+public:
+  Regex(const std::string &pattern);
 
-    bool hasIdentifier();
-    bool hasNumber();
-    bool hasString();
+  void regex_match(int,const std::string &, std::queue<Token *> &);
 
-    std::string getIdentifier();
-    int getNumber();
-    std::string getString();
-
-    ~Regex();
+  ~Regex();
 };
 
 #endif // !REGEX_H
