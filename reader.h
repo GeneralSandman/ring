@@ -9,16 +9,16 @@ class Reader
 private:
   std::string m_nFile;
   std::ifstream m_nFileStream;
-  std::size_t m_nLine;
-  std::size_t m_nCurrLine;
+  int m_nLine;
+  int m_nCurrLine;
 
   void m_fCountLine(void);
 
 public:
   Reader(const std::string &f);
   std::string readLine(void);
-  size_t getCurrLineNu(void) { return m_nCurrLine; }
-  size_t getLineNu(void) { return m_nLine; }
+  int getCurrLineNu(void) { return m_nCurrLine; }
+  int getLineNu(void) { return m_nLine; }
   bool haveMore(void) { return m_nLine > m_nCurrLine; }
   void resetToHead(void);
 };

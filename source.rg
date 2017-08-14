@@ -1,19 +1,18 @@
-#include <iostream>
-#include <string>
-#include <fstream>
+"lizhenhu say:\"hello world!\"\n"
 
-void readLine()
-{
-    std::ifstream fin("data.txt");
-    std::string s;
-    while (getline(fin, s))
-    {
-        std::cout << "Read from file: " << s << std::endl;
-    }
-}
+\\s*(||||||||||)?
 
-int main(){
 
-    readLine();
-    return 0;
-}
+(//.*)
+([0-9]+)
+(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")
+[A-Z_a-z][A-Z_a-z0-9]*
+==
+<=
+>=
+&&
+\\
+\\|
+\\p{Punct}
+
+
