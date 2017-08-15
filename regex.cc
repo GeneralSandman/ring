@@ -2,6 +2,7 @@
 #include "regex.h"
 #include "token.h"
 #include <iostream>
+#include <memory>
 
 void Regex::setLineNu(int l)
 {
@@ -23,30 +24,30 @@ bool Regex::m_fLookAt(const std::string &sou, int &begin, boost::regex reg, boos
     return false;
 }
 
-void Regex::m_fFillQueue(boost::cmatch &matcher, std::queue<Token *> &result)
+void Regex::m_fFillQueue(boost::cmatch &matcher, std::deque<std::shared_ptr<Token>> &result)
 {
     std::string m = matcher[1];
     if (m != "")
     {
         if (matcher[2] == "")
         {
-            Token *token;
+            std::shared_ptr<Token> token;
             if (matcher[3] != "")
             {
                 // std::cout << "is number:" << matcher[3] << std::endl;
-                token = new NumToken(m_nLine, stoi(matcher[3]));
+                token = std::shared_ptr<Token>(new NumToken(m_nLine, stoi(matcher[3])));
             }
             else if (matcher[4] != "")
             {
                 // std::cout << "is string:" << matcher[4] << std::endl;
-                token = new StrToken(m_nLine, matcher[4]);
+                token = std::shared_ptr<Token>(new StrToken(m_nLine, matcher[4]));
             }
             else
             {
                 // std::cout << "is identifier:" << matcher[1] << std::endl;
-                token = new IdToken(m_nLine, matcher[1]);
+                token = std::shared_ptr<Token>(new IdToken(m_nLine, matcher[1]));
             }
-            result.push(token);
+            result.push_back(token);
         }
     }
 }
@@ -57,9 +58,9 @@ Regex::Regex(const std::string &pattern)
 {
 }
 
-void Regex::regex_match(int line,const std::string &source, std::queue<Token *> &res)
+void Regex::regex_match(int line, const std::string &source, std::deque<std::shared_ptr<Token>> &res)
 {
-    m_nLine=line;
+    m_nLine = line;
     int begin = 0;
     int end = source.size();
     boost::cmatch matcher;

@@ -10,7 +10,10 @@ protected:
   int m_nLine;
 
 public:
-  Token(int l) : m_nLine(l) {}
+  Token(int l) : m_nLine(l)
+  {
+    // std::cout << "construct Token\n";
+  }
   int getLineNu(void) { return m_nLine; }
 
   virtual bool isIdentifier(void) { return false; }
@@ -18,15 +21,15 @@ public:
   virtual bool isString(void) { return false; }
 
   virtual int getNumber(void) { return INT_MIN; }
-  virtual std::string getIdName(void){return "";}
+  virtual std::string getIdName(void) { return ""; }
   virtual std::string getStrText(void) { return ""; }
 
   void printType(void);
+  virtual ~Token()
+  {
+    // std::cout << "destory Token\n";
+  }
 };
-
-static Token *Eof=new Token(-1);
-static std::string Eol="\n";
-
 
 class NumToken : public Token
 {
@@ -36,10 +39,17 @@ protected:
 public:
   NumToken(int line, int value)
       : m_nValue(value),
-        Token(line) {}
+        Token(line)
+  {
+    std::cout << "construct NumToken\n";
+  }
 
   bool isNumber(void) { return true; }
   int getNumber(void) { return m_nValue; }
+  ~NumToken()
+  {
+    std::cout << "destory NumToken\n";
+  }
 };
 
 class IdToken : public Token
@@ -50,10 +60,17 @@ protected:
 public:
   IdToken(int line, const std::string &idName)
       : m_nIdName(idName),
-        Token(line) {}
+        Token(line)
+  {
+    std::cout << "construct IdToken\n";
+  }
 
   bool isIdentifier(void) { return true; }
-  std::string getIdName(void){return m_nIdName;}
+  std::string getIdName(void) { return m_nIdName; }
+  ~IdToken()
+  {
+    std::cout << "destory IdToken\n";
+  }
 };
 
 class StrToken : public Token
@@ -64,10 +81,17 @@ protected:
 public:
   StrToken(int line, const std::string &strText)
       : m_nStrText(strText),
-        Token(line) {}
+        Token(line)
+  {
+    std::cout << "construct StrToken\n";
+  }
 
   bool isString(void) { return true; }
   std::string getStrText(void) { return m_nStrText; }
+  ~StrToken()
+  {
+    std::cout << "destory StrToken\n";
+  }
 };
 
 #endif

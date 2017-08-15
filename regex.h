@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <boost/regex.hpp>
+#include <memory>
 
 class Token;
 class Regex
@@ -12,14 +13,14 @@ private:
   boost::regex m_nRegex;
   int m_nLine;
 
-  void setLineNu(int );
+  void setLineNu(int);
   bool m_fLookAt(const std::string &sou, int &begin, boost::regex reg, boost::cmatch &mat);
-  void m_fFillQueue(boost::cmatch &, std::queue<Token *> &);
+  void m_fFillQueue(boost::cmatch &, std::deque<std::shared_ptr<Token>> &);
 
 public:
   Regex(const std::string &pattern);
 
-  void regex_match(int,const std::string &, std::queue<Token *> &);
+  void regex_match(int, const std::string &, std::deque<std::shared_ptr<Token>> &);
 
   ~Regex();
 };
