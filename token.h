@@ -25,9 +25,23 @@ public:
   virtual std::string getStrText(void) { return ""; }
 
   void printType(void);
+  bool isNotEof(void);
   virtual ~Token()
   {
     // std::cout << "destory Token\n";
+  }
+};
+
+class EofToken : public Token
+{
+public:
+  EofToken() : Token(-1)
+  {
+    // std::cout << "construct EolToken\n";
+  }
+  ~EofToken()
+  {
+    // std::cout << "distory EolToken\n";
   }
 };
 
@@ -41,14 +55,14 @@ public:
       : m_nValue(value),
         Token(line)
   {
-    std::cout << "construct NumToken\n";
+    // std::cout << "construct NumToken\n";
   }
 
   bool isNumber(void) { return true; }
   int getNumber(void) { return m_nValue; }
   ~NumToken()
   {
-    std::cout << "destory NumToken\n";
+    // std::cout << "destory NumToken\n";
   }
 };
 
@@ -62,14 +76,14 @@ public:
       : m_nIdName(idName),
         Token(line)
   {
-    std::cout << "construct IdToken\n";
+    // std::cout << "construct IdToken\n";
   }
 
   bool isIdentifier(void) { return true; }
   std::string getIdName(void) { return m_nIdName; }
   ~IdToken()
   {
-    std::cout << "destory IdToken\n";
+    // std::cout << "destory IdToken\n";
   }
 };
 
@@ -83,14 +97,14 @@ public:
       : m_nStrText(strText),
         Token(line)
   {
-    std::cout << "construct StrToken\n";
+    // std::cout << "construct StrToken\n";
   }
 
   bool isString(void) { return true; }
   std::string getStrText(void) { return m_nStrText; }
   ~StrToken()
   {
-    std::cout << "destory StrToken\n";
+    // std::cout << "destory StrToken\n";
   }
 };
 
