@@ -13,7 +13,7 @@ class A
     ~A() { cout << "distory\n"; }
 };
 
-int main()
+void test()
 {
     {
         deque<shared_ptr<A>> res;
@@ -26,7 +26,7 @@ int main()
 
         cout << "end----------------\n";
     }
-cout<<"+++++++++++++++++++"<<endl;
+    cout << "+++++++++++++++++++" << endl;
     {
         deque<shared_ptr<A>> res;
         shared_ptr<A> tmp;
@@ -38,6 +38,16 @@ cout<<"+++++++++++++++++++"<<endl;
 
         cout << "end----------------\n";
     }
+}
 
+shared_ptr<A> re(){
+    return nullptr;
+}
+int main()
+{
+    shared_ptr<A> p=re();
+    if(p==nullptr){
+        cout<<"p is nullptr"<<endl;
+    }
     return 0;
 }

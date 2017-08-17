@@ -24,6 +24,8 @@ public:
   virtual std::string getIdName(void) { return ""; }
   virtual std::string getStrText(void) { return ""; }
 
+  virtual std::string getText(void) {}
+
   void printType(void);
   bool isNotEof(void);
   virtual ~Token()
@@ -60,6 +62,8 @@ public:
 
   bool isNumber(void) { return true; }
   int getNumber(void) { return m_nValue; }
+
+  std::string getText(void) { return std::to_string(m_nValue); }
   ~NumToken()
   {
     // std::cout << "destory NumToken\n";
@@ -81,6 +85,8 @@ public:
 
   bool isIdentifier(void) { return true; }
   std::string getIdName(void) { return m_nIdName; }
+
+  std::string getText(void) { return m_nIdName; }
   ~IdToken()
   {
     // std::cout << "destory IdToken\n";
@@ -102,6 +108,8 @@ public:
 
   bool isString(void) { return true; }
   std::string getStrText(void) { return m_nStrText; }
+
+  std::string getText(void) { return m_nStrText; }
   ~StrToken()
   {
     // std::cout << "destory StrToken\n";
