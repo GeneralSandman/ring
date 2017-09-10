@@ -18,19 +18,21 @@ class Parser
     std::shared_ptr<Factory> m_pFactory;
 
   public:
-    Parser(){
-        std::cout<<"class Parser construct\n";
+    Parser()
+    {
+        std::cout << "class Parser construct\n";
     };
     Parser(const Parser &p)
     {
         m_nElements = p.m_nElements;
         m_pFactory = p.m_pFactory;
     }
-    ~Parser(){
-        std::cout<<"class Parser destory\n";
+    ~Parser()
+    {
+        std::cout << "class Parser destory\n";
     }
-    void parser(); //should return ASTree
-    bool match(std::shared_ptr<Lexer>);  //parmas are Lexer;
+    void parse(Lexer); //should return ASTree
+    bool match(Lexer); //parmas are Lexer;
 
     Parser rule(void);
     Parser rule(int);
