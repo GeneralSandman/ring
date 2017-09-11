@@ -21,6 +21,7 @@ public:
   int getLineNu(void) { return m_nLine; }
   bool haveMore(void) { return m_nLine > m_nCurrLine; }
   void resetToHead(void);
+  ~Reader();
 };
 
 #endif // !READER_H

@@ -31,15 +31,20 @@ Reader::Reader(const std::string &file)
 std::string Reader::readLine(void)
 {
     std::string result;
-    getline(m_nFileStream, result,'\n');
+    getline(m_nFileStream, result, '\n');
     result += '\n';
     m_nCurrLine++;
     return result;
 }
 
-  void Reader::resetToHead(void)
-  {
+void Reader::resetToHead(void)
+{
     m_nFileStream.clear();
     m_nFileStream.seekg(0, std::ios_base::beg);
-    m_nCurrLine=0;
-  }
+    m_nCurrLine = 0;
+}
+
+Reader::~Reader()
+{
+    m_nFileStream.close();
+}
